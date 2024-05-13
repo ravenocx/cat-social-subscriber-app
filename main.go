@@ -1,24 +1,14 @@
 package main
 
 import (
-	"fmt"
 	"log"
-	"os"
 	"time"
 
 	amqp "github.com/rabbitmq/amqp091-go"
 )
 
 func main() {
-	urlString := fmt.Sprintf(
-		"amqp://%s:%s@%s:%s/",
-		os.Getenv("RABBITMQ_USERNAME"),
-		os.Getenv("RABBITMQ_PASSWORD"),
-		os.Getenv("RABBITMQ_HOST"),
-		os.Getenv("RABBITMQ_PORT"),
-	)
-
-	conn, err := amqp.Dial(urlString)
+	conn, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
 	if err != nil {
 		log.Panicf("Failed to connect to RabbitMQ : %+v", err)
 	}
